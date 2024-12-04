@@ -6,9 +6,9 @@ void liberaMatriz(double **matriz, int n);
 void eliminacaoGauss(double **matriz, double *vetorB, int n);
 void substituicaoSucessiva(double **matriz, double *vetorB, double *vetorX, int n);
 
-int main(void) {
+int main(int argc, char *argv[]) {
 
-    FILE *fptr = fopen("sistema3x3.txt", "r");
+    FILE *fptr = fopen(argv[1], "r");
     if (fptr == NULL) {
         perror("Erro ao abrir o arquivo");
         return 1;
