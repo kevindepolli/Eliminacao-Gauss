@@ -81,22 +81,22 @@ int main(int argc, char *argv[]) {
     printf("Matriz lida do arquivo:\n");
     for (int i = 0; i < dimensao; i++) {
         for (int j = 0; j < dimensao; j++) {
-            printf("%lf ", matrizA[i][j]);
+            printf("%.2lf ", matrizA[i][j]);
         }
         printf("\n");
     }
 
-    printf("Vetor de resultados:\n");
+    printf("Vetor de resultados (Vetor B):\n");
     for (int i = 0; i < dimensao; i++) {
-        printf("%lf\n", vetorB[i]);
+        printf("%.2lf\n", vetorB[i]);
     }
 
     eliminacaoGauss(matrizA, vetorB, dimensao);
-    //substituicaoSucessiva(matrizA, vetorB, vetorX, dimensao);
+    substituicaoSucessiva(matrizA, vetorB, vetorX, dimensao);
 
-    printf("Vetor de variaveis:\n");
+    printf("Vetor de variáveis (Vetor X):\n");
     for (int i = 0; i < dimensao; i++) {
-        printf("%lf\n", vetorX[i]);
+        printf("%.2lf\n", vetorX[i]);
     }
 
     liberaMatriz(matrizA, dimensao);
@@ -169,5 +169,12 @@ void eliminacaoGauss(double **matriz, double *vetorB, int n) {
 }
 
 void substituicaoSucessiva(double **matriz, double *vetorB, double *vetorX, int n) {
-
+    // Substituição sucessiva: resolução da matriz triangular superior
+    for (int i = n - 1; i >= 0; i--) {
+        vetorX[i] = vetorB[i];
+        for (int j = i + 1; j < n; j++) {
+            vetorX[i] -= matriz[i][j] * vetorX[j];
+        }
+        vetorX[i] /= matriz[i][i];  // Divide pelo pivô
+    }
 }
