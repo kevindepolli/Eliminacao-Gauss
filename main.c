@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+/**
+ * @authors Isaack Anthony Cordeiro Arcanjo, Kevin Depoli, Pedro Nunes Dutra
+ */
+
 void liberaMatriz(double **matriz, int n);
 void eliminacaoGauss(double **matriz, double *vetorB, int n);
 void substituicaoSucessiva(double **matriz, double *vetorB, double *vetorX, int n);
