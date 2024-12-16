@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     eliminacaoGauss(matrizA, vetorB, dimensao);
     substituicaoSucessiva(matrizA, vetorB, vetorX, dimensao);
 
-    printf("Vetor de variáveis (Vetor X):\n");
+    printf("Vetor de variaveis (Vetor X):\n");
     for (int i = 0; i < dimensao; i++) {
         printf("%.2lf\n", vetorX[i]);
     }
@@ -169,6 +169,14 @@ void eliminacaoGauss(double **matriz, double *vetorB, int n) {
 }
 
 void substituicaoSucessiva(double **matriz, double *vetorB, double *vetorX, int n) {
+    FILE *log = fopen("log.txt", "a");
+
+    if (log == NULL) {
+        perror("Erro ao abrir o arquivo de log");
+    }
+
+    fprintf(log, "Vetor resultante (Vetor X):\n");
+
     // Substituição sucessiva: resolução da matriz triangular superior
     for (int i = n - 1; i >= 0; i--) {
         vetorX[i] = vetorB[i];
@@ -176,5 +184,10 @@ void substituicaoSucessiva(double **matriz, double *vetorB, double *vetorX, int 
             vetorX[i] -= matriz[i][j] * vetorX[j];
         }
         vetorX[i] /= matriz[i][i];  // Divide pelo pivô
+
+        fprintf(log, "%lf ", vetorX[i]);
     }
+
+    fprintf(log, "\n\n----------------------------------------------------\n\n");
+    fclose(log);
 }
